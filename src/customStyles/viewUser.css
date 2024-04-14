@@ -1,0 +1,17 @@
+.user-details {
+    display: flex;
+}
+
+.column {
+    flex: 1;
+    padding: 0 20px;
+}
+
+p {
+    margin-bottom: 10px;
+}
+
+.button-container {
+    margin-left: 15px;
+    margin-top: 20px;
+}
