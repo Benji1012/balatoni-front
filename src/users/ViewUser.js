@@ -165,7 +165,7 @@ const UserDetails = () => {
                     <div className="button-container"> {!editable ? (
                         <button className="btn btn-primary" onClick={handleEdit}>Módosítás</button>
                     ) : (
-                        <button className="btn btn-primary" onClick={handleSave}>Save</button>
+                        <button className="btn btn-primary" onClick={handleSave}>Mentés</button>
                     )}</div>
                 </div>
 

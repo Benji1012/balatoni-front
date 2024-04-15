@@ -58,7 +58,7 @@ const Apartmans = () => {
                         <div>
 
                             <div>Nem található felvett szállás</div>
-                            <button onClick={handleNewButton}>Új szállás</button>
+                            <button className="btn btn-primary" onClick={handleNewButton}>Új szállás</button>
                         </div>
                     ) : (<div>
                         {apartments.length === 0 ? (

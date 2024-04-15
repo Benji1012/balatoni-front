@@ -26,9 +26,7 @@ const RegistrationLogin = () => {
 
         fetch('http://localhost:8080/api/auth/usernames', {
             method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            },
+
         })
             .then(response => response.json())
             .then(data => setExistingUserNames(data))
