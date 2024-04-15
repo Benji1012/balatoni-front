@@ -51,7 +51,7 @@ const AddReview = () => {
     return (
         <div style={{ background: "#ADD8E6" }}>
             {userId && (
-                <div>
+                <div style={{ marginLeft: "5px" }}>
                     <p>Pont (maximum 5):</p>
                     <input type='number' min={1} max={5} value={points}
                         onChange={(e) => setPoints(e.target.value)}></input>

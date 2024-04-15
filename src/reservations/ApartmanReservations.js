@@ -53,7 +53,7 @@ const ApartmanReservations = () => {
         <div style={{ background: "#ADD8E6", padding: "20px" }}>
             {userId && (
                 <div>
-                    <h1>Foglalásaid</h1>
+                    <h1>Foglalások</h1>
                     {error ? (
                         <div>
 

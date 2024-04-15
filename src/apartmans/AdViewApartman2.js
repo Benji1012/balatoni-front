@@ -384,7 +384,7 @@ const AdViewApartman2 = () => {
                 </div>
                 <div className="column">
                     <p><b>Távolságok</b></p>
-                    <br></br>
+
                     {apartmanData.nameSightseeingProgram1 > 0 && (
                         <span>
                             {apartmanData.nameSightseeingProgram1 + ": " + apartmanData.distSightseeingProgram1} km
