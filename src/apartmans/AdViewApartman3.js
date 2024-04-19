@@ -2,20 +2,20 @@ import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useUserContext } from '../contexts/UserContext';
 import '../customStyles/addApartman.css';
+
 import { FaStar } from 'react-icons/fa';
 
-
-const AdViewApartman = () => {
-    const { apartmentId, rentingFrom, rentingTo } = useParams();
+const AdViewApartman3 = () => {
+    const { apartmentId } = useParams();
     const { userId, jwToken } = useUserContext();
     const navigate = useNavigate();
     const [apartmanData, setApartmanData] = useState(null);
-    const [reviewData, setReviewData] = useState(null);
     const [loading, setLoading] = useState(true);
 
+    const [reviewData, setReviewData] = useState(null);
 
     useState(() => {
-
+        console.log("Mennyi itt is? ", apartmentId);
         fetch(`http://192.168.1.65:8080/api/apartments/adview/${apartmentId}`, {
             method: 'GET',
             headers: {
@@ -30,14 +30,12 @@ const AdViewApartman = () => {
                 return response.json();
             })
             .then(data => {
-
-                setApartmanData(data)
+                setApartmanData(data);
                 setLoading(false);
 
 
             })
             .catch(error => {
-                console.error('Error fetching user details:', error);
 
 
             });
@@ -59,7 +57,6 @@ const AdViewApartman = () => {
 
                 setReviewData(data);
 
-
             })
             .catch(error => {
                 console.error('Error fetching user details:', error);
@@ -70,53 +67,36 @@ const AdViewApartman = () => {
     });
 
 
-    const handleReservation = () => {
-        if (userId) {
-            const rentingFromDate = new Date(rentingFrom);
-            const rentingToDate = new Date(rentingTo);
-            const diffInMilliseconds = Math.abs(rentingToDate - rentingFromDate);
+    useState(() => {
 
-            const diffInDays = Math.ceil(diffInMilliseconds / (1000 * 60 * 60 * 24));
+        fetch(`http://192.168.1.65:8080/api/apartments/adview/${apartmentId}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
 
-            const requestBody = {
-                "userId": userId,
-                "apartmanName": apartmanData.name,
-                "apartman": {
-                    "apartmanId": apartmanData.apartmanId,
-                },
-                "numberofNights": diffInDays,
-                "price": diffInDays * apartmanData.price,
-                "resFrom": rentingFrom,
-                "resTo": rentingTo
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
 
-            };
+                setApartmanData(data);
+                setLoading(false);
 
-            fetch(`http://192.168.1.65:8080/api/reservations/new`, {
-                method: 'PUT',
-                headers: {
-                    'Authorization': `Bearer ${jwToken}`,
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(requestBody),
 
             })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    navigate('/');
+            .catch(error => {
+                console.error('Error fetching user details:', error);
 
-                })
-                .catch(error => {
 
-                });
-        } else {
+            });
 
-        }
-    };
+    });
+
 
     if (loading) {
         return <div>Betöltés...</div>;
@@ -141,12 +121,6 @@ const AdViewApartman = () => {
                     <br></br>
                     Csillag: {apartmanData.stars}
                     <br></br>
-                    {apartmanData.reviewPoints > 0 && (
-                        <span>
-                            Értékelés: {apartmanData.reviewPoints}
-                            <br />
-                        </span>
-                    )}
                     Parkolóhelyek száma: {apartmanData.parkingSlots} db
                     <br></br>
                     Maximális emberek száma: {apartmanData.numberOfPeople} fő
@@ -209,15 +183,13 @@ const AdViewApartman = () => {
                         </span>
                     )}
 
-
                     {apartmanData.description && (
                         <span>
                             Leírás: {apartmanData.description}
                             <br />
                         </span>
                     )}
-                    <p><b>Kiválasztott időpont</b></p>
-                    {rentingFrom} -  {rentingTo}
+
                 </div>
                 <div className="column">
                     <b>Elérhetőségek</b>
@@ -441,18 +413,17 @@ const AdViewApartman = () => {
                             <br />
                         </span>
                     )}
+                    {apartmanData.reviewPoints > 0 && (
+                        <span>
+                            Értékelés: {apartmanData.reviewPoints}
+                            <br />
+                        </span>
+                    )}
+
                 </div>
-                <div></div>
-                {userId ? (
-                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                        <button onClick={handleReservation} className="btn btn-primary">Foglalás</button>
-                    </div>
-                ) : (<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                    <span>
-                        Szállás foglalásáshoz kérem jelentkezzen be
-                    </span>
-                </div>)}
+
             </div>
+
             <div className="image-gallery">
                 {[...Array(10)].map((_, index) => (
                     apartmanData[`image${index + 1}`] && (
@@ -470,7 +441,6 @@ const AdViewApartman = () => {
             <div className="reviews-section">
                 {reviewData ? (
                     <>
-                        <h1>Értékelések:</h1>
                         <div className="review-cards">
                             {reviewData.map(review => (
                                 <div className="review-card" key={review.reviewId}>
@@ -491,7 +461,6 @@ const AdViewApartman = () => {
             </div>
         </div>
     );
-
 };
 
-export default AdViewApartman;
+export default AdViewApartman3;

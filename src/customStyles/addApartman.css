@@ -81,3 +81,34 @@
     line-height: 32px;
     font-size: 1.25em;
 }
+
+@media only screen and (max-width: 768px) {
+    .review-cards {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .review-card {
+        width: calc(50% - 10px);
+    }
+}
+
+@media only screen and (max-width: 576px) {
+    .review-card {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .apartment-container {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 0 10px;
+    }
+}
+
+@media only screen and (max-width: 576px) {
+    .apartment-container {
+        grid-template-columns: 1fr;
+    }
+}

@@ -12,7 +12,10 @@ import AddApartman from './apartmans/AddApartman';
 import ViewApartman from './apartmans/ViewApartman';
 import AdViewApartman from './apartmans/AdViewApartman';
 import AdViewApartman2 from './apartmans/AdViewApartman2';
+import AdViewApartman3 from './apartmans/AdViewApartman3';
 import AddReview from './reviews/AddReview';
+import ViewReview from './reviews/ViewReview';
+import Reviews from './reviews/Reviews';
 import RegistrationLogin from './pages/RegistrationLogin';
 import { UserProvider } from './contexts/UserContext';
 
@@ -35,7 +38,11 @@ function App() {
           <Route path="/viewApartman/:apartmentId" element={<ViewApartman />} />
           <Route path="/adWiewApartman/:apartmentId/:rentingFrom/:rentingTo" element={<AdViewApartman />} />
           <Route path="/adWiewApartman2/:reservationId/:apartmentId/:rentingFrom/:rentingTo" element={<AdViewApartman2 />} />
+          <Route path="/adWiewApartman3/:apartmentId" element={<AdViewApartman3 />} />
           <Route path="/addReview/:apartmentId/:userId" element={<AddReview />} />
+          <Route path="/viewReview/:reviewId" element={<ViewReview />} />
+          <Route path="/reviews/:userId" element={<Reviews />} />
+
           <Route path="/aprtmanReservations/:apartmentId" element={<ApartmanReservations />} />
 
 

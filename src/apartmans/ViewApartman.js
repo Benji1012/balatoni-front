@@ -11,13 +11,13 @@ const ViewApartman = () => {
     const { userId, jwToken } = useUserContext();
     const navigate = useNavigate();
     const [name, setName] = useState('');
-    const [ownerId, setOwnerId] = useState('');
+
     const [city, setCity] = useState('');
     const [address, setAddress] = useState('');
     const [mobile, setMobile] = useState('');
     const [email, setEmail] = useState('');
     const [website, setWebsite] = useState('');
-    const [type, setType] = useState(0);
+
 
     const [stars, setStars] = useState(0);
     const [numberOfPeople, setNumberOfPeople] = useState(0);
@@ -47,7 +47,7 @@ const ViewApartman = () => {
     const [isHungarian, setIsHungarian] = useState(false);
     const [isEnglisch, setIsEnglisch] = useState(false);
     const [isGerman, setIsGerman] = useState(false);
-    const [isOtherLanguage, setIsOtherLanguage] = useState(false);
+
     const [isHorseRiding, setIsHorseRiding] = useState(false);
     const [isSurf, setIsSurf] = useState(false);
     const [isBar, setIsBar] = useState(false);
@@ -101,7 +101,7 @@ const ViewApartman = () => {
         const token = jwToken;
 
         if (userId) {
-            fetch(`http://localhost:8080/api/apartments/view/${apartmentId}`, {
+            fetch(`http://192.168.1.65:8080/api/apartments/view/${apartmentId}`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -145,7 +145,7 @@ const ViewApartman = () => {
     });
 
     const handleSubmit = () => {
-        setOwnerId(userId);
+
 
         const formData = new FormData();
 
@@ -156,7 +156,7 @@ const ViewApartman = () => {
             }
         });
 
-        fetch('http://localhost:8080/api/apartments/upload-images', {
+        fetch('http://192.168.1.65:8080/api/apartments/upload-images', {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${jwToken}`,
@@ -264,7 +264,7 @@ const ViewApartman = () => {
                         "isHungarian": isHungarian,
                         "isEnglisch": isEnglisch,
                         "isGerman": isGerman,
-                        "isOtherLanguage": isOtherLanguage,
+
                         "isHorseRiding": isHorseRiding,
                         "isSurf": isSurf,
                         "isFishing": isFishing,
@@ -320,7 +320,7 @@ const ViewApartman = () => {
                         }
                     }
 
-                    fetch(`http://localhost:8080/api/apartments/edit/${apartmentId}`, {
+                    fetch(`http://192.168.1.65:8080/api/apartments/edit/${apartmentId}`, {
                         method: 'POST',
                         headers: {
                             'Authorization': `Bearer ${jwToken}`,
@@ -387,7 +387,7 @@ const ViewApartman = () => {
         const token = jwToken;
 
         if (userId) {
-            fetch(`http://localhost:8080/api/apartments/delete/${apartmentId}`, {
+            fetch(`http://192.168.1.65:8080/api/apartments/delete/${apartmentId}`, {
                 method: 'DELETE',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -944,25 +944,11 @@ const ViewApartman = () => {
                         </label>
                         <br></br>
 
-                        <label>
-                            Gyerekmentes
-                            <input
-                                type="checkbox"
-                                checked={editable ? isNoKid : apartmanData.isNoKid} readOnly={!editable}
-                                onChange={(e) => setIsNoKid(e.target.checked)}
-                            />
-                        </label>
-                        <br></br>
-
-
 
 
                     </div>
 
                     <div >
-
-
-
 
 
                         <p><b>Távolságok (km)</b></p>
@@ -1106,8 +1092,7 @@ const ViewApartman = () => {
                     <textarea type="textarea"
                         value={editable ? description : apartmanData.description} readOnly={!editable}
                         onChange={(e) => setDescription(e.target.value)}
-                        rows="6" cols="50">
-
+                        rows="2" cols="25">
                     </textarea>
                 </label>
 

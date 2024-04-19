@@ -13,6 +13,7 @@ const Home = () => {
   const [noApartmanLikeThat, setNoApartmanLikeThat] = useState(false);
   const [datePicked, setDatePicked] = useState(true)
   const today = new Date().toISOString().split('T')[0];
+  const [loading, setLoading] = useState(true);
 
   const [formData, setFormData] = useState({
     name: '',
@@ -88,19 +89,22 @@ const Home = () => {
   };
 
 
+
   const handleInputChange = (e) => {
-    const { id, value } = e.target;
+    const { id, type, checked, value } = e.target;
+    const inputValue = type === "checkbox" ? checked : value;
+    console.log("Mi mi lesz? ", id, "|", inputValue, "|")
     setFormData((prevData) => ({
       ...prevData,
-      [id]: (value == "on" ? true : (value == "off" ? false : value))
+      [id]: inputValue === false ? null : inputValue,
     }));
   };
-
   const [error, setError] = useState('');
   useEffect(() => {
     const token = jwToken;
+    console.log("Formdata: ", formData);
 
-    fetch(`http://localhost:8080/api/apartments/filtered`, {
+    fetch(`http://192.168.1.65:8080/api/apartments/filtered`, {
       method: 'POST',
       headers: {
 
@@ -122,11 +126,14 @@ const Home = () => {
         } else {
           setNoApartmanLikeThat(false);
           setApartments(data);
+          setLoading(false);
+
         }
 
       })
       .catch(error => {
         setNoApartmanLikeThat(true);
+        setLoading(false);
       });
 
   }, [userId, jwToken, filterClicked]);
@@ -142,6 +149,7 @@ const Home = () => {
   };
 
   const handleFilter = () => {
+    setLoading(true);
     if (filterClicked) {
       setFilterClicked(false);
     } else {
@@ -152,7 +160,9 @@ const Home = () => {
 
 
   return (
+
     <div style={{ display: 'flex', margin: '5px' }}>
+
 
       <div style={{ flex: 1, backgroundColor: '#ADD8E6', padding: '2px', borderRadius: '15px', marginRight: '5px' }}>
 
@@ -165,17 +175,22 @@ const Home = () => {
         <br></br>
         <label>Nyaralás vége</label>
         <br></br>
+
+
+
         <input
           type="date" id='rentingTo' onChange={handleInputChange} value={formData.rentingTo}
         />
         <br></br>
-        <label>Minimális ár</label>
+        <button style={{ marginLeft: '5px' }} onClick={handleFilter} className="btn btn-primary">Szűrés</button  >
+        <br></br>
+        <label>Minimális ár / éj</label>
         <br></br>
         <input
           type="number" id='priceMin' onChange={handleInputChange}
         />
         <br></br>
-        <label>Maximális ár</label>
+        <label>Maximális ár / éj</label>
         <br></br>
         <input
           type="number" id='priceMax' onChange={handleInputChange}
@@ -222,7 +237,7 @@ const Home = () => {
           type="number" id='numberOfPeopleMax' min={0} onChange={handleInputChange}
         />
         <br></br>
-        <label>Csillagok száma</label>
+        <label>Minimum csillagok száma</label>
         <br></br>
         <input
           type="number" id='stars' min={0} onChange={handleInputChange}
@@ -330,14 +345,7 @@ const Home = () => {
           id='isOwnerLivesThere'
           className="checkmargin" onChange={handleInputChange}
         />
-        <br></br>
-        <label>Gyerekmentes</label>
-        <input
-          type="checkbox"
-          id='isNoKid'
-          className="checkmargin" onChange={handleInputChange}
-        />
-        <br></br>
+
         <label>Telefonszámmal rendelkező</label>
         <input
           type="checkbox"
@@ -400,6 +408,7 @@ const Home = () => {
           id='isSauna'
           className="checkmargin" onChange={handleInputChange}
         />
+        <br></br>
         <label>Medence</label>
         <input
           type="checkbox"
@@ -463,7 +472,7 @@ const Home = () => {
           className="checkmargin" onChange={handleInputChange}
         />
         <br></br>
-        <label>Dohányzásra kijelölt hely</label>
+        <label>Dohányzóbarát szállás</label>
         <input
           type="checkbox"
           id='isSmoking'
@@ -562,13 +571,14 @@ const Home = () => {
       </div>
 
       <div style={{ flex: 3 }}>
-        <div>
 
+
+        {loading === true ? (<h1>Töltés, kérem várjon!</h1>) : (
           <div>
             {apartments.length === 0 || noApartmanLikeThat === true ? (
               <h1>Nem található a keresési feltételeknek megfelelő szállás</h1>
             ) : (
-              <div className="row row-cols-1 row-cols-md-4 g-4">
+              <div className="row row-cols-1 row-cols-md-3 g-3">
                 {apartments.map(apartment => (
                   <div className="col" key={apartment.apartmanId} >
                     <div className="card h-100" style={{ backgroundColor: '#ADD8E6' }}>
@@ -596,7 +606,8 @@ const Home = () => {
               </div>
             )}
           </div>
-        </div>
+        )}
+
       </div>
     </div>
   );

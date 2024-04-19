@@ -21,7 +21,7 @@ const UserDetails = () => {
         const token = jwToken;
 
         if (userId) {
-            fetch(`http://localhost:8080/api/user/view/${userId}`, {
+            fetch(`http://192.168.1.65:8080/api/user/view/${userId}`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -74,7 +74,7 @@ const UserDetails = () => {
         const token = jwToken;
 
         if (userId) {
-            fetch(`http://localhost:8080/api/user/edit/${userId}`, {
+            fetch(`http://192.168.1.65:8080/api/user/edit/${userId}`, {
                 method: 'PUT',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -122,59 +122,71 @@ const UserDetails = () => {
     if (loading) return <div>Loading...</div>;
     if (error) return <div> {error}</div>;
 
+
     return (
-        <div style={{ background: "#ADD8E6" }}>
-            {userData && (
-                <div >
-                    < div className="user-details"  >
-
-                        <div className="column">
-                            <p><strong>Email cím:</strong><br />
-                                <input type="email" value={editable ? emailValue : userData.email} readOnly={!editable} onChange={(e) => setEmailValue(e.target.value)} />
-                            </p>
-                            <p><strong>Város:</strong><br />
-                                <input type="text" value={editable ? cityValue : userData.city} readOnly={!editable} onChange={(e) => setCityValue(e.target.value)} />
-                            </p>
-                            <p><strong>Adószám:</strong><br />
-                                <input type="number" value={editable ? taxIdValue : userData.taxIdNumber} readOnly={!editable} onChange={(e) => setTaxIdValue(e.target.value)} />
-                            </p>
-                            <p><strong>Telefon:</strong><br />
-                                <input type="number" value={editable ? mobilValue : userData.mobil} readOnly={!editable} onChange={(e) => setMobileValue(e.target.value)} />
-                            </p>
-
-                        </div>
-                        <div className="column">
-                            <p><strong>Név:</strong><br />
-                                <input type="text" value={editable ? nameValue : userData.name} readOnly={!editable} onChange={(e) => setNameValue(e.target.value)} />
-                            </p>
-                            <p><strong>Cím:</strong><br />
-                                <input type="text" value={editable ? AddressValue : userData.address} readOnly={!editable} onChange={(e) => setAdressValue(e.target.value)} />
-                            </p>
-                            <p><strong>Személyi azonosítószám:</strong><br />
-                                <input type="text" value={editable ? idValue : userData.personalId} readOnly={!editable} onChange={(e) => setIdValue(e.target.value)} />
-                            </p>
-                            <p><strong>Magánszemély:</strong>
-                                <input type="checkbox" checked={editable ? isPrivatePersonValue : userData.isPrivatePerson} readOnly={!editable} onChange={handleCheckboxChange} />
-                            </p>
-                            <p>
-                                <strong>Hűségpontok: {userData.loyaltyPoint}</strong>
-                            </p>
-                        </div>
-
-                    </div >
-                    <div className="button-container"> {!editable ? (
-                        <button className="btn btn-primary" onClick={handleEdit}>Módosítás</button>
-                    ) : (
-                        <button className="btn btn-primary" onClick={handleSave}>Mentés</button>
-                    )}</div>
-                </div>
+        <div className="user-details-container">
+            <div className="user-details">
 
 
-            )
-            }
-        </div >
+                <label>Email cím:</label>
+                <br />
 
+                <input type="email" value={editable ? emailValue : userData.email} readOnly={!editable} onChange={(e) => setEmailValue(e.target.value)} />
+
+                <br />
+
+                <label>Város:</label>
+                <br />
+                <input type="text" value={editable ? cityValue : userData.city} readOnly={!editable} onChange={(e) => setCityValue(e.target.value)} />
+                <br />
+
+                <label>Adószám:</label>
+                <br />
+                <input type="number" value={editable ? taxIdValue : userData.taxIdNumber} readOnly={!editable} onChange={(e) => setTaxIdValue(e.target.value)} />
+                <br />
+
+                <label>Telefon:</label>
+                <br />
+                <input type="number" value={editable ? mobilValue : userData.mobil} readOnly={!editable} onChange={(e) => setMobileValue(e.target.value)} />
+                <br />
+
+                <label>Név:</label>
+                <br />
+                <input type="text" value={editable ? nameValue : userData.name} readOnly={!editable} onChange={(e) => setNameValue(e.target.value)} />
+                <br />
+
+                <label>Cím:</label>
+                <br />
+                <input type="text" value={editable ? AddressValue : userData.address} readOnly={!editable} onChange={(e) => setAdressValue(e.target.value)} />
+                <br />
+
+                <label>Személyi azonosítószám:</label>
+                <br />
+                <input type="text" value={editable ? idValue : userData.personalId} readOnly={!editable} onChange={(e) => setIdValue(e.target.value)} />
+                <br />
+
+                <label>Magánszemély: </label>
+                <br />
+                <input type="checkbox" checked={editable ? isPrivatePersonValue : userData.isPrivatePerson} readOnly={!editable} onChange={handleCheckboxChange} />
+                <br />
+
+                <label>Hűségpontok: </label>
+                <br />
+
+                <span>{userData.loyaltyPoint}</span>
+                <br />
+
+            </div>
+            <div className="button-container">
+                {!editable ? (
+                    <button className="btn btn-primary" onClick={handleEdit}>Módosítás</button>
+                ) : (
+                    <button className="btn btn-primary" onClick={handleSave}>Mentés</button>
+                )}
+            </div>
+        </div>
     );
+
 };
 
 export default UserDetails;

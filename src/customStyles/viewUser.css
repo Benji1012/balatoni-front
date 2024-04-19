@@ -1,17 +1,38 @@
-.user-details {
+.user-details-container {
+    background: #ADD8E6;
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
     display: flex;
+    flex-wrap: wrap;
 }
 
-.column {
-    flex: 1;
-    padding: 0 20px;
+.user-details {
+    flex: 1 1 100%;
+    text-align: center;
+    flex-basis: 100%;
+
 }
 
-p {
-    margin-bottom: 10px;
+
+
+.user-details-container label {
+    font-weight: bold;
+}
+
+.input-group input[type="checkbox"] {
+    margin-left: 5px;
 }
 
 .button-container {
-    margin-left: 15px;
-    margin-top: 20px;
+    text-align: center;
+    flex-basis: 100%;
+}
+
+@media (min-width: 768px) {
+
+
+    .button-container {
+        flex: 1 1 100%;
+    }
 }

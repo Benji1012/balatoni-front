@@ -7,13 +7,12 @@ const AddApartman = () => {
     const { userId, jwToken } = useUserContext();
     const navigate = useNavigate();
     const [name, setName] = useState('');
-    const [ownerId, setOwnerId] = useState('');
+
     const [city, setCity] = useState('');
     const [address, setAddress] = useState('');
     const [mobile, setMobile] = useState('');
     const [email, setEmail] = useState('');
     const [website, setWebsite] = useState('');
-    const [type, setType] = useState(0);
     const [stars, setStars] = useState(0);
     const [parkingSlots, setParkingSlots] = useState(0);
     const [description, setDescription] = useState('');
@@ -38,13 +37,13 @@ const AddApartman = () => {
     const [isHungarian, setIsHungarian] = useState(false);
     const [isEnglisch, setIsEnglisch] = useState(false);
     const [isGerman, setIsGerman] = useState(false);
-    const [isOtherLanguage, setIsOtherLanguage] = useState(false);
+
     const [isHorseRiding, setIsHorseRiding] = useState(false);
     const [isSurf, setIsSurf] = useState(false);
     const [isBar, setIsBar] = useState(false);
     const [isSeperate, setIsSeperate] = useState(false);
     const [isOwnerLivesThere, setIsOwnerLivesThere] = useState(false);
-    const [isNoKid, setIsNoKid] = useState(false);
+
     const [isNorth, setIsNorth] = useState(false);
     const [isFishing, setIsFishing] = useState(false);
     const [numberOfPeople, setNumberOfPeople] = useState(0);
@@ -88,7 +87,7 @@ const AddApartman = () => {
     const [price, setPrice] = useState(0);
 
     const handleSubmit = () => {
-        setOwnerId(userId);
+
 
         const formData = new FormData();
 
@@ -99,7 +98,7 @@ const AddApartman = () => {
             }
         });
 
-        fetch('http://localhost:8080/api/apartments/upload-images', {
+        fetch('http://192.168.1.65:8080/api/apartments/upload-images', {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${jwToken}`,
@@ -196,14 +195,13 @@ const AddApartman = () => {
                         "isHungarian": isHungarian,
                         "isEnglisch": isEnglisch,
                         "isGerman": isGerman,
-                        "isOtherLanguage": isOtherLanguage,
                         "isHorseRiding": isHorseRiding,
                         "isSurf": isSurf,
                         "isFishing": isFishing,
                         "isBar": isBar,
                         "isSeperate": isSeperate,
                         "isOwnerLivesThere": isOwnerLivesThere,
-                        "isNoKid": isNoKid,
+
                         "description": description,
                         "distBalaton": distBalaton,
                         "distRail": distRail,
@@ -238,7 +236,7 @@ const AddApartman = () => {
 
                     };
 
-                    fetch(`http://localhost:8080/api/apartments/new`, {
+                    fetch(`http://192.168.1.65:8080/api/apartments/new`, {
                         method: 'PUT',
                         headers: {
                             'Authorization': `Bearer ${jwToken}`,
@@ -314,34 +312,26 @@ const AddApartman = () => {
                 <div className="apartment-container">
                     <div className="apartment-details">
 
-
+                        <b>Alap adatok</b>
+                        <br></br>
                         <input
                             type="text"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
                             placeholder='Név'
                         />
-
-
-
                         <input
                             type="text"
                             value={city}
                             onChange={(e) => setCity(e.target.value)}
                             placeholder='Város'
                         />
-
-
-
-
-
                         <input
                             type="text"
                             value={address}
                             onChange={(e) => setAddress(e.target.value)}
                             placeholder='Cím'
                         />
-
                         <label>
                             Ár éjszakánként
                             <input
@@ -360,7 +350,6 @@ const AddApartman = () => {
                                 <option value="1">Hotel</option>
                                 <option value="2">Vendégház</option>
                                 <option value="3">Panzió</option>
-
                             </select>
                         </label>
                         <br />
@@ -411,35 +400,25 @@ const AddApartman = () => {
                         </label>
                         <br></br>
                         <p><b>Elérhetőségek</b></p>
-
-
                         <input
                             type="number"
                             value={mobile}
                             onChange={(e) => setMobile(e.target.value)}
                             placeholder='Telefonszám'
                         />
-
-
-
                         <input
                             type="email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             placeholder='E-mail cím'
                         />
-
-
-
                         <input
                             type="text"
                             value={website}
                             onChange={(e) => setWebsite(e.target.value)}
                             placeholder='Weboldal'
                         />
-
                         <br></br>
-
                         <label>
                             Látványosság 1 név:
                             <input
@@ -449,7 +428,6 @@ const AddApartman = () => {
                             />
                         </label>
                         <br></br>
-
                         <label>
                             Látványosság 2 név:
                             <input
@@ -459,7 +437,6 @@ const AddApartman = () => {
                             />
                         </label>
                         <br></br>
-
                         <label>
                             Látványosság 3 név:
                             <input
@@ -468,16 +445,8 @@ const AddApartman = () => {
                                 onChange={(e) => setNameSightseeingProgram3(e.target.value)}
                             />
                         </label>
-
-
-
-
                     </div>
-
                     <div className="column">
-
-
-
                         <b>Beszélt nyelvek:</b>
                         <br></br>
                         <label>
@@ -507,8 +476,6 @@ const AddApartman = () => {
                             />
                         </label>
                         <br></br>
-
-
                         <b>Felszereltség / programok</b>
                         <br></br>
                         <label>
@@ -546,7 +513,6 @@ const AddApartman = () => {
                                 onChange={(e) => setIsPool(e.target.checked)}
                             />
                         </label>
-
                         <br></br>
                         <label>
                             Trambulin
@@ -574,9 +540,7 @@ const AddApartman = () => {
                                 onChange={(e) => setIsTabbleTennis(e.target.checked)}
                             />
                         </label>
-
                         <br></br>
-
                         <label>
                             Billiárd
                             <input
@@ -585,9 +549,7 @@ const AddApartman = () => {
                                 onChange={(e) => setIsBilliard(e.target.checked)}
                             />
                         </label>
-
                         <br></br>
-
                         <label>
                             Tenisz
                             <input
@@ -596,9 +558,7 @@ const AddApartman = () => {
                                 onChange={(e) => setIsTennis(e.target.checked)}
                             />
                         </label>
-
                         <br></br>
-
                         <label>
                             Jacuzzi
                             <input
@@ -607,9 +567,7 @@ const AddApartman = () => {
                                 onChange={(e) => setIsJacuzzi(e.target.checked)}
                             />
                         </label>
-
                         <br></br>
-
                         <label>
                             Masszás
                             <input
@@ -618,11 +576,7 @@ const AddApartman = () => {
                                 onChange={(e) => setIsMassage(e.target.checked)}
                             />
                         </label>
-
                         <br></br>
-
-
-
                         <label>
                             Játszótér
                             <input
@@ -631,11 +585,7 @@ const AddApartman = () => {
                                 onChange={(e) => setIsPlayGround(e.target.checked)}
                             />
                         </label>
-
                         <br></br>
-
-
-
                         <label>
                             Cigizésre kijelölt hely
                             <input
@@ -644,9 +594,7 @@ const AddApartman = () => {
                                 onChange={(e) => setIsSmoking(e.target.checked)}
                             />
                         </label>
-
                         <br></br>
-
                         <label>
                             Lovaglás
                             <input
@@ -683,7 +631,6 @@ const AddApartman = () => {
                             />
                         </label>
                         <br></br>
-
                         <label>
                             Part menti
                             <input
@@ -693,7 +640,6 @@ const AddApartman = () => {
                             />
                         </label>
                         <br></br>
-
                         <label>
                             Teljes étkeztetés
                             <input
@@ -703,7 +649,6 @@ const AddApartman = () => {
                             />
                         </label>
                         <br></br>
-
                         <label>
                             Állatbarát
                             <input
@@ -721,9 +666,7 @@ const AddApartman = () => {
                                 onChange={(e) => setIsKidFriendly(e.target.checked)}
                             />
                         </label>
-
                         <br></br>
-
                         <label>
                             Akadálymentesített
                             <input
@@ -732,9 +675,7 @@ const AddApartman = () => {
                                 onChange={(e) => setIsUniversallyAccessable(e.target.checked)}
                             />
                         </label>
-
                         <br></br>
-
                         <label>
                             Különálló szállás
                             <input
@@ -753,7 +694,6 @@ const AddApartman = () => {
                             />
                         </label>
                         <br></br>
-
                         <label>
                             Északi part
                             <input
@@ -763,28 +703,9 @@ const AddApartman = () => {
                             />
                         </label>
                         <br></br>
-
-                        <label>
-                            Gyerekmentes
-                            <input
-                                type="checkbox"
-                                checked={isNoKid}
-                                onChange={(e) => setIsNoKid(e.target.checked)}
-                            />
-                        </label>
-                        <br></br>
-
-
                     </div>
-
                     <div className="column">
-
-
-
-
-
                         <p><b>Távolságok</b></p>
-
                         <label>
                             Látványosság 1:
                             <br></br>
@@ -816,7 +737,6 @@ const AddApartman = () => {
                             />
                         </label>
                         km
-
                         <label>
                             Balaton:
                             <br />
@@ -909,8 +829,6 @@ const AddApartman = () => {
                         </label>
                         km
                     </div>
-
-
                 </div>
             )}
 
@@ -922,7 +840,7 @@ const AddApartman = () => {
                     <textarea type="textarea"
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
-                        rows="6" cols="50">
+                        rows="2" cols="25">
 
                     </textarea>
                 </label>

@@ -43,6 +43,15 @@ export default function Navbar() {
 
         }
     };
+    const handleReviewssClick = () => {
+
+        if (jwToken) {
+
+            navigate(`/reviews/${userId}`);
+        } else {
+
+        }
+    };
 
     const handleHomeClick = () => {
 
@@ -66,30 +75,38 @@ export default function Navbar() {
 
     return (
         <div>
-            <nav className="navbar  navbar-dark bg-primary">
-                <div className="container-fluid d-flex justify-content-between align-items-center">
-                    <div>
-                        <button className="btn btn-outline-light" style={{ marginRight: "10px" }} onClick={handleHomeClick}>Balatoni Szállás</button>
-                        {loggedIn && (
-                            <>
-                                <button className="btn btn-outline-light " style={{ marginRight: "10px" }} onClick={handleProfileClick}>Profil</button>
-                                <button className="btn btn-outline-light " style={{ marginRight: "10px" }} onClick={handleReservationsClick}>Foglalások</button>
-                                <button className="btn btn-outline-light " style={{ marginRight: "10px" }} onClick={handleApartmantsClick}>Apartmanjaim</button>
-                            </>
-                        )}
-                    </div>
-                    <div>
-                        {loggedIn ? (
-                            <>
-                                <label className="text-white bg-transparent" style={{ marginRight: "10px" }}>Üdvözlünk: {userName}</label>
-                                <button className="btn btn-outline-light" onClick={handleLogOutClick}>Kijelentkezés</button>
-                            </>
-                        ) : (
-                            <button className="btn btn-outline-light" onClick={handleLogInClick}>Bejelentkezés / Regisztráció</button>
-                        )}
+            <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
+                <div className="container-fluid">
+                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span className="navbar-toggler-icon"></span>
+                    </button>
+                    <div className="collapse navbar-collapse" id="navbarNav">
+                        <div className="navbar-nav">
+                            <button className="btn btn-outline-light " style={{ marginLeft: '1vw' }} onClick={handleHomeClick}>Balatoni Szállás</button>
+                            {loggedIn && (
+                                <>
+                                    <button className="btn btn-outline-light " style={{ marginLeft: '1vw' }} onClick={handleProfileClick}>Profil</button>
+                                    <button className="btn btn-outline-light " style={{ marginLeft: '1vw' }} onClick={handleReservationsClick}>Foglalások</button>
+                                    <button className="btn btn-outline-light " style={{ marginLeft: '1vw' }} onClick={handleApartmantsClick}>Apartmanjaim</button>
+                                    <button className="btn btn-outline-light " style={{ marginLeft: '1vw' }} onClick={handleReviewssClick}>Értékeléseim</button>
+                                </>
+                            )}
+                        </div>
+                        <div className="navbar-nav ms-auto">
+                            {loggedIn ? (
+                                <>
+                                    <label className="text-white bg-transparent " style={{ display: 'flex', alignItems: 'center', marginLeft: '1vw' }}>Üdvözlünk: {userName}</label>
+                                    <button className="btn btn-outline-light " style={{ marginLeft: '1vw' }} onClick={handleLogOutClick}>Kijelentkezés</button>
+                                </>
+                            ) : (
+                                <button className="btn btn-outline-light " style={{ marginLeft: '1vw' }} onClick={handleLogInClick}>Bejelentkezés / Regisztráció</button>
+                            )}
+                        </div>
                     </div>
                 </div>
             </nav>
         </div>
     );
+
 }

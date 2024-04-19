@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useUserContext } from '../contexts/UserContext';
 import '../customStyles/addApartman.css';
@@ -16,7 +16,7 @@ const AdViewApartman2 = () => {
 
     useState(() => {
 
-        fetch(`http://localhost:8080/api/apartments/adview/${apartmentId}`, {
+        fetch(`http://192.168.1.65:8080/api/apartments/adview/${apartmentId}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -40,7 +40,7 @@ const AdViewApartman2 = () => {
 
             });
 
-        fetch(`http://localhost:8080/api/reviews/view/${apartmentId}`, {
+        fetch(`http://192.168.1.65:8080/api/reviews/view/${apartmentId}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -79,7 +79,7 @@ const AdViewApartman2 = () => {
 
     useState(() => {
 
-        fetch(`http://localhost:8080/api/apartments/adview/${apartmentId}`, {
+        fetch(`http://192.168.1.65:8080/api/apartments/adview/${apartmentId}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -114,7 +114,7 @@ const AdViewApartman2 = () => {
         const token = jwToken;
 
         if (userId) {
-            fetch(`http://localhost:8080/api/reservations/delete/${reservationId}`, {
+            fetch(`http://192.168.1.65:8080/api/reservations/delete/${reservationId}`, {
                 method: 'DELETE',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -148,6 +148,8 @@ const AdViewApartman2 = () => {
 
             <div className="apartment-container">
                 <div className="apartment-details">
+                    <b>Alap adatok</b>
+                    <br></br>
                     Név: {apartmanData.name}
                     <br></br>
                     Város: {apartmanData.city}
@@ -156,7 +158,7 @@ const AdViewApartman2 = () => {
                     <br></br>
                     Cím: {apartmanData.address}
                     <br></br>
-                    Szállás típusa {(apartmanData.type == 0 ? "Apartman" : (apartmanData.type == 1 ? "Hotel" : (apartmanData.type == 2 ? "Vendégház" : "Panzió")))}
+                    Szállás típusa {(apartmanData.type === 0 ? "Apartman" : (apartmanData.type === 1 ? "Hotel" : (apartmanData.type === 2 ? "Vendégház" : "Panzió")))}
                     <br></br>
                     Csillag: {apartmanData.stars}
                     <br></br>
@@ -221,12 +223,7 @@ const AdViewApartman2 = () => {
                             <br />
                         </span>
                     )}
-                    {apartmanData.isNoKid && (
-                        <span>
-                            Gyerekmentes
-                            <br />
-                        </span>
-                    )}
+
                     {apartmanData.description && (
                         <span>
                             Leírás: {apartmanData.description}
@@ -237,7 +234,8 @@ const AdViewApartman2 = () => {
                     {rentingFrom} -  {rentingTo}
                 </div>
                 <div className="column">
-                    <p><b>Elérhetőségek</b></p>
+                    <b>Elérhetőségek</b>
+                    <br />
                     {apartmanData.mobile && (
                         <span>
                             Telefonszám: {apartmanData.mobile}
@@ -383,8 +381,8 @@ const AdViewApartman2 = () => {
                     )}
                 </div>
                 <div className="column">
-                    <p><b>Távolságok</b></p>
-
+                    <b>Távolságok</b>
+                    <br />
                     {apartmanData.nameSightseeingProgram1 > 0 && (
                         <span>
                             {apartmanData.nameSightseeingProgram1 + ": " + apartmanData.distSightseeingProgram1} km

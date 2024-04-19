@@ -1,24 +1,60 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useUserContext } from '../contexts/UserContext';
 import { useNavigate, useParams } from 'react-router-dom';
 
-const AddReview = () => {
+const ViewReview = () => {
     const navigate = useNavigate();
     const { userId, jwToken } = useUserContext();
-    const { apartmentId } = useParams();
-
+    const { reviewId } = useParams();
     const [points, setPoints] = useState(1);
     const [comment, setComment] = useState("");
 
+    useEffect(() => {
+        const token = jwToken;
+
+        if (reviewId) {
+            fetch(`http://192.168.1.65:8080/api/reviews/view/one/${reviewId}`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+
+
+                    setPoints(data.reviewPoint);
+                    setComment(data.reviewComment)
+
+                })
+                .catch(error => {
+
+
+
+                });
+        } else {
+
+
+        }
+    }, [userId, jwToken]);
+
+
+
     const handleReview = () => {
         const requestBody = {
-            "apartmanId": apartmentId,
-            "userId": userId,
+
             "reviewComment": comment,
             "reviewPoint": points
         }
 
-        fetch(`http://192.168.1.65:8080/api/reviews/new`, {
+        fetch(`http://192.168.1.65:8080/api/reviews/edit/${reviewId}`, {
             method: 'PUT',
             headers: {
                 'Authorization': `Bearer ${jwToken}`,
@@ -35,7 +71,7 @@ const AddReview = () => {
                 return response.json();
             })
             .then(data => {
-                navigate(`/reservations/${userId}`);
+                navigate(`/reviews/${userId}`);
 
             })
             .catch(error => {
@@ -69,4 +105,4 @@ const AddReview = () => {
     );
 };
 
-export default AddReview;
+export default ViewReview;

@@ -13,7 +13,8 @@ const RegistrationLogin = () => {
 
     useEffect(() => {
 
-        fetch('http://localhost:8080/api/auth/emails', {
+        // fetch('http://localhost:8080/api/auth/emails', {
+        fetch('http://192.168.1.65:8080/api/auth/emails', {
             method: 'GET',
 
         })
@@ -24,7 +25,7 @@ const RegistrationLogin = () => {
 
     useEffect(() => {
 
-        fetch('http://localhost:8080/api/auth/usernames', {
+        fetch('http://192.168.1.65:8080/api/auth/usernames', {
             method: 'GET',
 
         })
@@ -126,7 +127,7 @@ const RegistrationLogin = () => {
 
             let loginSuccess = false;
 
-            fetch('http://localhost:8080/api/auth/signin', {
+            fetch('http://192.168.1.65:8080/api/auth/signin', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -145,7 +146,7 @@ const RegistrationLogin = () => {
 
                     } else {
                         loginSuccess = false;
-                        errors.login = "Rossz email cím vagy jelszó!";
+                        errors.login = "Rossz felhasználónév vagy jelszó!";
                         setValidationErrors(errors);
                     }
                     if (loginSuccess) {
@@ -187,7 +188,7 @@ const RegistrationLogin = () => {
 
         if (validateForm()) {
 
-            fetch('http://localhost:8080/api/auth/signup', {
+            fetch('http://192.168.1.65:8080/api/auth/signup', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -214,8 +215,9 @@ const RegistrationLogin = () => {
     };
 
     return (
-        <div className="registration-login-container" style={{ marginLeft: '175px', marginRight: '175px' }}>
 
+        <div className="registration-login-container" style={{ marginLeft: '5vw', marginRight: '5vw' }}>
+            <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
             <ul className="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
                 <li className="nav-item" role="presentation">
                     <a className={!isRegistrationMode ? 'nav-link active' : 'nav-link'} id="tab-login" href="#pills-login" role="tab"
