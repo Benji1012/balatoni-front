@@ -108,8 +108,6 @@ const Reviews = () => {
 
                                                 ))}
                                                 <div>{review.reviewComment}</div>
-                                                <div>{review.reviewId}</div>
-
 
                                             </p>
                                             <button className="btn btn-primary" style={{ marginBottom: '1vw' }} onClick={() => handleViewReview(review.reviewId)}>Értékelés módisítása</button>
