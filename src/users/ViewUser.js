@@ -21,7 +21,7 @@ const UserDetails = () => {
         const token = jwToken;
 
         if (userId) {
-            fetch(`http://192.168.1.65:8080/api/user/view/${userId}`, {
+            fetch(`http://localhost:8080/api/user/view/${userId}`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -74,7 +74,7 @@ const UserDetails = () => {
         const token = jwToken;
 
         if (userId) {
-            fetch(`http://192.168.1.65:8080/api/user/edit/${userId}`, {
+            fetch(`http://localhost:8080/api/user/edit/${userId}`, {
                 method: 'PUT',
                 headers: {
                     'Authorization': `Bearer ${token}`,

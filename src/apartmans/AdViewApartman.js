@@ -1,22 +1,46 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useUserContext } from '../contexts/UserContext';
 import '../customStyles/addApartman.css';
 import { FaStar } from 'react-icons/fa';
+import Modal from 'react-modal';
+import '../customStyles/viewUser.css';
+
 
 
 const AdViewApartman = () => {
     const { apartmentId, rentingFrom, rentingTo } = useParams();
     const { userId, jwToken } = useUserContext();
     const navigate = useNavigate();
-    const [apartmanData, setApartmanData] = useState(null);
-    const [reviewData, setReviewData] = useState(null);
+    const [apartmanData, setApartmanData] = useState([]);
+    const [reviewData, setReviewData] = useState([]);
     const [loading, setLoading] = useState(true);
+    let subtitle;
+    const [modalIsOpen, setIsOpen] = React.useState(false);
+    const rentingFromDate = new Date(rentingFrom);
+    const rentingToDate = new Date(rentingTo);
+    const diffInMilliseconds = Math.abs(rentingToDate - rentingFromDate);
+
+    const diffInDays = Math.ceil(diffInMilliseconds / (1000 * 60 * 60 * 24));
+
+    function openModal() {
+        setIsOpen(true);
+    }
+
+    function afterOpenModal() {
+
+        subtitle.style.color = '#000';
+    }
+
+    function closeModal() {
+        setIsOpen(false);
+    }
 
 
-    useState(() => {
 
-        fetch(`http://192.168.1.65:8080/api/apartments/adview/${apartmentId}`, {
+    useEffect(() => {
+
+        fetch(`http://localhost:8080/api/apartments/adview/${apartmentId}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -42,7 +66,7 @@ const AdViewApartman = () => {
 
             });
 
-        fetch(`http://192.168.1.65:8080/api/reviews/view/${apartmentId}`, {
+        fetch(`http://localhost:8080/api/reviews/view/${apartmentId}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -67,16 +91,12 @@ const AdViewApartman = () => {
 
             });
 
-    });
+    }, [apartmentId]);
 
 
     const handleReservation = () => {
         if (userId) {
-            const rentingFromDate = new Date(rentingFrom);
-            const rentingToDate = new Date(rentingTo);
-            const diffInMilliseconds = Math.abs(rentingToDate - rentingFromDate);
 
-            const diffInDays = Math.ceil(diffInMilliseconds / (1000 * 60 * 60 * 24));
 
             const requestBody = {
                 "userId": userId,
@@ -91,7 +111,7 @@ const AdViewApartman = () => {
 
             };
 
-            fetch(`http://192.168.1.65:8080/api/reservations/new`, {
+            fetch(`http://localhost:8080/api/reservations/new`, {
                 method: 'PUT',
                 headers: {
                     'Authorization': `Bearer ${jwToken}`,
@@ -121,6 +141,9 @@ const AdViewApartman = () => {
     if (loading) {
         return <div>Betöltés...</div>;
     }
+
+
+
 
     return (
         <div >
@@ -369,19 +392,19 @@ const AdViewApartman = () => {
                 <div className="column">
                     <b>Távolságok</b>
                     <br />
-                    {apartmanData.nameSightseeingProgram1 > 0 && (
+                    {apartmanData.nameSightseeingProgram1 != "" && (
                         <span>
                             {apartmanData.nameSightseeingProgram1 + ": " + apartmanData.distSightseeingProgram1} km
                             <br />
                         </span>
                     )}
-                    {apartmanData.nameSightseeingProgram2 > 0 && (
+                    {apartmanData.nameSightseeingProgram2 != "" && (
                         <span>
                             {apartmanData.nameSightseeingProgram2 + ": " + apartmanData.distSightseeingProgram2} km
                             <br />
                         </span>
                     )}
-                    {apartmanData.nameSightseeingProgram3 > 0 && (
+                    {apartmanData.nameSightseeingProgram3 != "" && (
                         <span>
                             {apartmanData.nameSightseeingProgram3 + ": " + apartmanData.distSightseeingProgram3} km
                             <br />
@@ -444,14 +467,63 @@ const AdViewApartman = () => {
                 </div>
                 <div></div>
                 {userId ? (
-                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                        <button onClick={handleReservation} className="btn btn-primary">Foglalás</button>
+                    <div>
+                        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+
+
+
+                            <div>
+                                <button onClick={openModal} className="btn btn-primary" >Foglalás részletei</button>
+                                <Modal
+                                    isOpen={modalIsOpen}
+                                    onAfterOpen={afterOpenModal}
+                                    onRequestClose={closeModal}
+                                    style={{
+                                        content: {
+                                            width: '50%',
+                                            margin: 'auto',
+                                            height: '60%',
+                                            padding: '25px',
+                                            backgroundColor: '#ADD8E6',
+                                            borderRadius: '10px'
+                                        },
+                                    }}
+
+
+                                ><div className="user-details" >
+                                        <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Foglalás részletei</h2>
+
+                                        <div><b>Kiválasztott időpont</b><br />
+                                            {rentingFrom} -  {rentingTo}<br />
+                                            <b>Éjszakák száma</b><br />
+                                            {diffInDays}<br />
+                                            <b>Teljes ár</b><br />
+                                            {diffInDays * apartmanData.price} Ft<br />
+
+                                        </div>
+
+
+
+                                        <div style={{ marginTop: '20px' }}>
+                                            <button onClick={handleReservation} className="btn btn-primary" style={{ marginRight: '2vw' }}>Foglalás</button>
+                                            <button onClick={closeModal} className="btn btn-primary">Bezárás</button>
+                                        </div>
+                                    </div>
+
+                                </Modal>
+                            </div>
+
+                        </div>
+
                     </div>
-                ) : (<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                    <span>
-                        Szállás foglalásáshoz kérem jelentkezzen be
-                    </span>
-                </div>)}
+                ) : (
+                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                        <span>
+                            Szállás foglalásáshoz kérem jelentkezzen be
+                        </span>
+                    </div>
+                )}
+
             </div>
             <div className="image-gallery">
                 {[...Array(10)].map((_, index) => (
@@ -489,9 +561,12 @@ const AdViewApartman = () => {
                     <p>Még nem érkezett értékelés a szálláshoz</p>
                 )}
             </div>
-        </div>
+
+
+        </div >
     );
 
 };
 
 export default AdViewApartman;
+

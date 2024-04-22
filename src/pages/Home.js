@@ -104,7 +104,7 @@ const Home = () => {
     const token = jwToken;
     console.log("Formdata: ", formData);
 
-    fetch(`http://192.168.1.65:8080/api/apartments/filtered`, {
+    fetch(`http://localhost:8080/api/apartments/filtered`, {
       method: 'POST',
       headers: {
 

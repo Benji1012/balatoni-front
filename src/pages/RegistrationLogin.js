@@ -14,7 +14,7 @@ const RegistrationLogin = () => {
     useEffect(() => {
 
         // fetch('http://localhost:8080/api/auth/emails', {
-        fetch('http://192.168.1.65:8080/api/auth/emails', {
+        fetch('http://localhost:8080/api/auth/emails', {
             method: 'GET',
 
         })
@@ -25,7 +25,7 @@ const RegistrationLogin = () => {
 
     useEffect(() => {
 
-        fetch('http://192.168.1.65:8080/api/auth/usernames', {
+        fetch('http://localhost:8080/api/auth/usernames', {
             method: 'GET',
 
         })
@@ -127,7 +127,7 @@ const RegistrationLogin = () => {
 
             let loginSuccess = false;
 
-            fetch('http://192.168.1.65:8080/api/auth/signin', {
+            fetch('http://localhost:8080/api/auth/signin', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -188,7 +188,7 @@ const RegistrationLogin = () => {
 
         if (validateForm()) {
 
-            fetch('http://192.168.1.65:8080/api/auth/signup', {
+            fetch('http://localhost:8080/api/auth/signup', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

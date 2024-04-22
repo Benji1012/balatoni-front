@@ -16,7 +16,7 @@ const AdViewApartman2 = () => {
 
     useState(() => {
 
-        fetch(`http://192.168.1.65:8080/api/apartments/adview/${apartmentId}`, {
+        fetch(`http://localhost:8080/api/apartments/adview/${apartmentId}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -40,7 +40,7 @@ const AdViewApartman2 = () => {
 
             });
 
-        fetch(`http://192.168.1.65:8080/api/reviews/view/${apartmentId}`, {
+        fetch(`http://localhost:8080/api/reviews/view/${apartmentId}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -79,7 +79,7 @@ const AdViewApartman2 = () => {
 
     useState(() => {
 
-        fetch(`http://192.168.1.65:8080/api/apartments/adview/${apartmentId}`, {
+        fetch(`http://localhost:8080/api/apartments/adview/${apartmentId}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -114,7 +114,7 @@ const AdViewApartman2 = () => {
         const token = jwToken;
 
         if (userId) {
-            fetch(`http://192.168.1.65:8080/api/reservations/delete/${reservationId}`, {
+            fetch(`http://localhost:8080/api/reservations/delete/${reservationId}`, {
                 method: 'DELETE',
                 headers: {
                     'Authorization': `Bearer ${token}`,

@@ -15,7 +15,7 @@ const Reviews = () => {
         const token = jwToken;
 
         if (userId) {
-            fetch(`http://192.168.1.65:8080/api/reviews/user/${userId}`, {
+            fetch(`http://localhost:8080/api/reviews/user/${userId}`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -59,7 +59,7 @@ const Reviews = () => {
         const token = jwToken;
 
         if (userId) {
-            fetch(`http://192.168.1.65:8080/api/reviews/delete/${reviewId}`, {
+            fetch(`http://localhost:8080/api/reviews/delete/${reviewId}`, {
                 method: 'DELETE',
                 headers: {
                     'Authorization': `Bearer ${token}`,

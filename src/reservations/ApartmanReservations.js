@@ -14,7 +14,7 @@ const ApartmanReservations = () => {
         const token = jwToken;
 
         if (userId) {
-            fetch(`http://192.168.1.65:8080/api/reservations/apartman/${apartmentId}`, {
+            fetch(`http://localhost:8080/api/reservations/apartman/${apartmentId}`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${token}`,

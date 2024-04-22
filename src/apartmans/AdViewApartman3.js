@@ -16,7 +16,7 @@ const AdViewApartman3 = () => {
 
     useState(() => {
         console.log("Mennyi itt is? ", apartmentId);
-        fetch(`http://192.168.1.65:8080/api/apartments/adview/${apartmentId}`, {
+        fetch(`http://localhost:8080/api/apartments/adview/${apartmentId}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -40,7 +40,7 @@ const AdViewApartman3 = () => {
 
             });
 
-        fetch(`http://192.168.1.65:8080/api/reviews/view/${apartmentId}`, {
+        fetch(`http://localhost:8080/api/reviews/view/${apartmentId}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -69,7 +69,7 @@ const AdViewApartman3 = () => {
 
     useState(() => {
 
-        fetch(`http://192.168.1.65:8080/api/apartments/adview/${apartmentId}`, {
+        fetch(`http://localhost:8080/api/apartments/adview/${apartmentId}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
