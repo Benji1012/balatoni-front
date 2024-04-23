@@ -68,8 +68,8 @@ const AdViewApartman2 = () => {
 
     useState(() => {
         const today = new Date();
-        const rentingToDate = new Date(rentingTo);
-        if (rentingToDate < today) {
+        const rentingFromDate = new Date(rentingFrom);
+        if (rentingFromDate < today) {
             setOld(true)
         } else {
             setOld(false)

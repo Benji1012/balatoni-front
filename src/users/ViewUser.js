@@ -131,7 +131,7 @@ const UserDetails = () => {
                 <label>Email cím:</label>
                 <br />
 
-                <input type="email" value={editable ? emailValue : userData.email} readOnly={!editable} onChange={(e) => setEmailValue(e.target.value)} />
+                <input type="email" value={editable ? emailValue : userData.email} readOnly={true} onChange={(e) => setEmailValue(e.target.value)} />
 
                 <br />
 
