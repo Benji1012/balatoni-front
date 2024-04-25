@@ -13,7 +13,7 @@ const ViewReview = () => {
         const token = jwToken;
 
         if (reviewId) {
-            fetch(`http://localhost:8080/api/reviews/view/one/${reviewId}`, {
+            fetch(`http://192.168.1.65:8080/api/reviews/view/one/${reviewId}`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -54,7 +54,7 @@ const ViewReview = () => {
             "reviewPoint": points
         }
 
-        fetch(`http://localhost:8080/api/reviews/edit/${reviewId}`, {
+        fetch(`http://192.168.1.65:8080/api/reviews/edit/${reviewId}`, {
             method: 'PUT',
             headers: {
                 'Authorization': `Bearer ${jwToken}`,

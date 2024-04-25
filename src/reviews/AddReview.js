@@ -18,7 +18,7 @@ const AddReview = () => {
             "reviewPoint": points
         }
 
-        fetch(`http://localhost:8080/api/reviews/new`, {
+        fetch(`http://192.168.1.65:8080/api/reviews/new`, {
             method: 'PUT',
             headers: {
                 'Authorization': `Bearer ${jwToken}`,

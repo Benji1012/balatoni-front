@@ -40,7 +40,7 @@ const AdViewApartman = () => {
 
     useEffect(() => {
 
-        fetch(`http://localhost:8080/api/apartments/adview/${apartmentId}`, {
+        fetch(`http://192.168.1.65:8080/api/apartments/adview/${apartmentId}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -66,7 +66,7 @@ const AdViewApartman = () => {
 
             });
 
-        fetch(`http://localhost:8080/api/reviews/view/${apartmentId}`, {
+        fetch(`http://192.168.1.65:8080/api/reviews/view/${apartmentId}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -111,7 +111,7 @@ const AdViewApartman = () => {
 
             };
 
-            fetch(`http://localhost:8080/api/reservations/new`, {
+            fetch(`http://192.168.1.65:8080/api/reservations/new`, {
                 method: 'PUT',
                 headers: {
                     'Authorization': `Bearer ${jwToken}`,

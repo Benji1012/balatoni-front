@@ -101,7 +101,7 @@ const ViewApartman = () => {
         const token = jwToken;
 
         if (userId) {
-            fetch(`http://localhost:8080/api/apartments/view/${apartmentId}`, {
+            fetch(`http://192.168.1.65:8080/api/apartments/view/${apartmentId}`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -156,7 +156,7 @@ const ViewApartman = () => {
             }
         });
 
-        fetch('http://localhost:8080/api/apartments/upload-images', {
+        fetch('http://192.168.1.65:8080/api/apartments/upload-images', {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${jwToken}`,
@@ -320,7 +320,7 @@ const ViewApartman = () => {
                         }
                     }
 
-                    fetch(`http://localhost:8080/api/apartments/edit/${apartmentId}`, {
+                    fetch(`http://192.168.1.65:8080/api/apartments/edit/${apartmentId}`, {
                         method: 'POST',
                         headers: {
                             'Authorization': `Bearer ${jwToken}`,
@@ -387,7 +387,7 @@ const ViewApartman = () => {
         const token = jwToken;
 
         if (userId) {
-            fetch(`http://localhost:8080/api/apartments/delete/${apartmentId}`, {
+            fetch(`http://192.168.1.65:8080/api/apartments/delete/${apartmentId}`, {
                 method: 'DELETE',
                 headers: {
                     'Authorization': `Bearer ${token}`,

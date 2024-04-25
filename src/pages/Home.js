@@ -93,18 +93,18 @@ const Home = () => {
   const handleInputChange = (e) => {
     const { id, type, checked, value } = e.target;
     const inputValue = type === "checkbox" ? checked : value;
-    console.log("Mi mi lesz? ", id, "|", inputValue, "|")
     setFormData((prevData) => ({
       ...prevData,
       [id]: inputValue === false ? null : inputValue,
     }));
   };
+
   const [error, setError] = useState('');
   useEffect(() => {
     const token = jwToken;
     console.log("Formdata: ", formData);
 
-    fetch(`http://localhost:8080/api/apartments/filtered`, {
+    fetch(`http://192.168.1.65:8080/api/apartments/filtered`, {
       method: 'POST',
       headers: {
 

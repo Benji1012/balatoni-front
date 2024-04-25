@@ -97,9 +97,9 @@ const AddApartman = () => {
             } else {
             }
         });
+        //fetch('http://192.168.1.658080/api/apartments/upload-images', {
+        fetch('http://192.168.1.65:8080/api/apartments/upload-images', {
 
-        //fetch('http://192.168.1.65:8080/api/apartments/upload-images', {
-        fetch('http://localhost:8080/api/apartments/upload-images', {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${jwToken}`,
@@ -237,7 +237,7 @@ const AddApartman = () => {
 
                     };
 
-                    fetch(`http://localhost:8080/api/apartments/new`, {
+                    fetch(`http://192.168.1.65:8080/api/apartments/new`, {
                         method: 'PUT',
                         headers: {
                             'Authorization': `Bearer ${jwToken}`,
